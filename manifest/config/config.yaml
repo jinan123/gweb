@@ -1,6 +1,6 @@
 # HTTP Server.
 server:
-  address: ":8000"
+  address: ":6677"
   dumpRouterMap: true
   routeOverWrite: true
   accessLogEnabled: true
@@ -19,6 +19,13 @@ database:
     stdout: true
 
   default:
-    link: "mysql:root:12345678@tcp(127.0.0.1:3306)/test"
+    link: "mysql:gweb:gweb666@tcp(39.107.126.209:3306)/gweb"
     debug: true
 
+# Redis. 配置参考：https://goframe.org/pages/viewpage.action?pageId=1114217 k8s上的密码 bC54E4Vdi5
+redis:
+  default:
+    address: "127.0.0.1:6379"
+    db: "0"
+    pass: ""
+    idleTimeout: "20"

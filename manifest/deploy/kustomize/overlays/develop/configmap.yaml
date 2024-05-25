@@ -1,4 +1,4 @@
-apiVersion: v1
+apiVersion: users
 kind: ConfigMap
 metadata:
   name: gf-demos-configmap

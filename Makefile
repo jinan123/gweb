@@ -1,6 +1,6 @@
 ROOT_DIR    = $(shell pwd)
 NAMESPACE   = "default"
-DEPLOY_NAME = "gf-demo-user"
-DOCKER_NAME = "gf-demo-user"
+DEPLOY_NAME = "gweb"
+DOCKER_NAME = "gweb"
 
 include ./hack/hack.mk

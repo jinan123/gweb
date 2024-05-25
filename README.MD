@@ -7,7 +7,7 @@
 ### 2. Use `git clone` to clone the repo to your local folder.
 
 ```
-git clone https://github.com/gogf/gf-demo-user
+git clone https://github.com/gogf/gweb
 ```
 
 ### 3. Import `manifest/sql/create.sql` to your database.
@@ -27,29 +27,29 @@ git clone https://github.com/gogf/gf-demo-user
 ----------|--------|-----------------------|--------------------------------------------------------------------------------------|---------------------------
   :8000   | ALL    | /swagger/*            | github.com/gogf/gf/v2/net/ghttp.(*Server).swaggerUI                                  | HOOK_BEFORE_SERVE
 ----------|--------|-----------------------|--------------------------------------------------------------------------------------|---------------------------
-  :8000   | POST   | /user/check-nick-name | github.com/gogf/gf-demo-user/v2/internal/controller/user.(*Controller).CheckNickName | service.IMiddleware.Ctx   
+  :8000   | POST   | /user/check-nick-name | gweb/internal/controller/user.(*Controller).CheckNickName | service.IMiddleware.Ctx   
           |        |                       |                                                                                      | ghttp.MiddlewareCORS      
 ----------|--------|-----------------------|--------------------------------------------------------------------------------------|---------------------------
-  :8000   | POST   | /user/check-passport  | github.com/gogf/gf-demo-user/v2/internal/controller/user.(*Controller).CheckPassport | service.IMiddleware.Ctx   
+  :8000   | POST   | /user/check-passport  | gweb/internal/controller/user.(*Controller).CheckPassport | service.IMiddleware.Ctx   
           |        |                       |                                                                                      | ghttp.MiddlewareCORS      
 ----------|--------|-----------------------|--------------------------------------------------------------------------------------|---------------------------
-  :8000   | POST   | /user/is-signed-in    | github.com/gogf/gf-demo-user/v2/internal/controller/user.(*Controller).IsSignedIn    | service.IMiddleware.Ctx   
+  :8000   | POST   | /user/is-signed-in    | gweb/internal/controller/user.(*Controller).IsSignedIn    | service.IMiddleware.Ctx   
           |        |                       |                                                                                      | ghttp.MiddlewareCORS      
 ----------|--------|-----------------------|--------------------------------------------------------------------------------------|---------------------------
-  :8000   | GET    | /user/profile         | github.com/gogf/gf-demo-user/v2/internal/controller/user.(*Controller).Profile       | service.IMiddleware.Ctx
+  :8000   | GET    | /user/profile         | gweb/internal/controller/user.(*Controller).Profile       | service.IMiddleware.Ctx
           |        |                       |                                                                                      | ghttp.MiddlewareCORS
 ----------|--------|-----------------------|--------------------------------------------------------------------------------------|---------------------------
-  :8000   | GET    | /user/profile         | github.com/gogf/gf-demo-user/v2/internal/controller/user.(*Controller).Profile       | service.IMiddleware.Ctx
+  :8000   | GET    | /user/profile         | gweb/internal/controller/user.(*Controller).Profile       | service.IMiddleware.Ctx
           |        |                       |                                                                                      | ghttp.MiddlewareCORS
           |        |                       |                                                                                      | service.IMiddleware.Auth
 ----------|--------|-----------------------|--------------------------------------------------------------------------------------|---------------------------
-  :8000   | POST   | /user/sign-in         | github.com/gogf/gf-demo-user/v2/internal/controller/user.(*Controller).SignIn        | service.IMiddleware.Ctx
+  :8000   | POST   | /user/sign-in         | gweb/internal/controller/user.(*Controller).SignIn        | service.IMiddleware.Ctx
           |        |                       |                                                                                      | ghttp.MiddlewareCORS
 ----------|--------|-----------------------|--------------------------------------------------------------------------------------|---------------------------
-  :8000   | POST   | /user/sign-out        | github.com/gogf/gf-demo-user/v2/internal/controller/user.(*Controller).SignOut       | service.IMiddleware.Ctx
+  :8000   | POST   | /user/sign-out        | gweb/internal/controller/user.(*Controller).SignOut       | service.IMiddleware.Ctx
           |        |                       |                                                                                      | ghttp.MiddlewareCORS
 ----------|--------|-----------------------|--------------------------------------------------------------------------------------|---------------------------
-  :8000   | POST   | /user/sign-up         | github.com/gogf/gf-demo-user/v2/internal/controller/user.(*Controller).SignUp        | service.IMiddleware.Ctx
+  :8000   | POST   | /user/sign-up         | gweb/internal/controller/user.(*Controller).SignUp        | service.IMiddleware.Ctx
           |        |                       |                                                                                      | ghttp.MiddlewareCORS
 ----------|--------|-----------------------|--------------------------------------------------------------------------------------|---------------------------
 ```
