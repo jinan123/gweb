@@ -3,6 +3,7 @@ package easychat
 //定义队列字典
 type QueueMap struct {
 	GroupMsgQueue string //群聊记录消息队列
+	Gift          string //监听礼物
 }
 
 //推送事件定义
@@ -12,6 +13,7 @@ type EventsMap struct {
 	LoginEvent      string //登录
 	OutEvent        string //退出
 	GroupReplyEvent string //群消息推送
+	WriteEvent      string //输入中
 }
 
 //离线队列
@@ -23,6 +25,7 @@ type OffLineQueueFixMap struct {
 func GetQueueMap() QueueMap {
 	return QueueMap{
 		GroupMsgQueue: "groupMsgQueue",
+		Gift:          "giftMsgQueue",
 	}
 }
 
@@ -34,6 +37,7 @@ func GetEventsMap() EventsMap {
 		LoginEvent:      "loginEvent",
 		OutEvent:        "outEvent",
 		GroupReplyEvent: "groupReplyEvent",
+		WriteEvent:      "writeEvent",
 	}
 }
 

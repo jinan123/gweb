@@ -53,6 +53,12 @@ func (this *EasyChatServiceStruct) Online(s socketio.Conn, msg string) string {
 			})
 		}
 	}()
+	go func() {
+		//自动拉取未读消息
+		php2go.Sleep(2)
+		g.Dump("开始拉取未读消息")
+		this.UnRead(s)
+	}()
 	return this.Result.SuccessMsg()
 }
 
@@ -108,6 +114,7 @@ func (this *EasyChatServiceStruct) UnReadGroup(s socketio.Conn, userId string) {
 	//推送好友未读消息
 	currTime := gtime.Now().Timestamp() * 1000
 	offLineGroupMsgQueueKey := this.OfflineQueueFixMap.OffLineGroupMsgQueue + userId
+	g.Dump(offLineGroupMsgQueueKey)
 	//通过延时队列实现延时发送
 	msgs := this.EasyRedis.Zrangebyscore(offLineGroupMsgQueueKey, 0, currTime)
 	//拉取离线队列
@@ -118,8 +125,7 @@ func (this *EasyChatServiceStruct) UnReadGroup(s socketio.Conn, userId string) {
 			if err != nil {
 				g.Log().Warning(nil, err)
 			} else {
-				data := gconv.Map(msgMap["data"])
-				msgDataMap := gconv.Map(data["message"])
+				msgDataMap := gconv.Map(msgMap["message"])
 				mqScore := gconv.Int64(msgDataMap["millisecond"])
 				this.SendMsg(s, this.Events.GroupReplyEvent, msg, offLineGroupMsgQueueKey, mqScore)
 			}

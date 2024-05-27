@@ -22,3 +22,14 @@ type MsgRecordRes struct {
 	Records        []MsgRecords `json:"records"`
 	MinMillisecond int64        `json:"min_millisecond"`
 }
+
+//聊天记录模型
+type SendGiftMsgReq struct {
+	g.Meta `path:"/chat/gift" method:"post" tags:"UserService" summary:"礼物"`
+	Uid    string `json:"uid"`
+	Gtype  int    `json:"gtype"`
+}
+
+//获取聊天记录响应
+type SendGiftMsgRes struct {
+}

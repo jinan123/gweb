@@ -101,6 +101,7 @@ func (this *EasyChatServiceStruct) DecodeGroupMsg(message string) GroupMessage {
 func (this *EasyChatServiceStruct) SendMsg(s socketio.Conn, eventStr, msg, mqKey string, mqScore int64) {
 	s.Emit(eventStr, msg, func(d string) {
 		g.Dump("收到的ACK：" + d)
+		g.Dump(mqKey)
 		this.EasyRedis.ZremRangByScore(mqKey, mqScore, mqScore)
 	})
 }
@@ -124,4 +125,35 @@ func (this *EasyChatServiceStruct) InQueuePre(mqKey string, mqScore int64, msg s
 		delLen := queueLen - 100 - 1
 		this.EasyRedis.ZremRangeByRank(mqKey, 0, delLen)
 	}
+}
+
+// 解码群消息
+func (this *EasyChatServiceStruct) Entering(s socketio.Conn, msgTxt string) string {
+	targetUsersMap := this.Dogs()
+	msgMap := g.Map{}
+	err := php2go.JSONDecode([]byte(msgTxt), &msgMap)
+	if err != nil {
+		g.Log().Warning(gctx.New(), err)
+		return ""
+	}
+	suid := gconv.String(msgMap["send_user_id"])
+	currUserDogs := targetUsersMap[suid]
+	if len(targetUsersMap) > 0 {
+		for _, v := range targetUsersMap {
+			targetUid := gconv.String(v.Id)
+			//判断用户是否在线,在线的不用发送
+			u, err := this.GetSocketByUserId(targetUid)
+			if err != nil {
+			} else {
+				//在线的直接发送消息
+				u.Socket.Emit(this.Events.WriteEvent, gconv.String(g.Map{
+					"txt":          currUserDogs.Nickname + " 正在输入......",
+					"send_user_id": suid,
+				}), func(d string) {
+					g.Dump("收到的输入中ACK：" + d)
+				})
+			}
+		}
+	}
+	return "ok"
 }

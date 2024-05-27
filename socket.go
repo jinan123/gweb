@@ -86,6 +86,11 @@ func SocketIo() {
 		return easy.UnRead(s)
 	})
 
+	//输入中
+	server.OnEvent("/", "entering", func(s socketio.Conn, msg string) string {
+		return easy.Entering(s, msg)
+	})
+
 	//异常
 	server.OnError("/", func(s socketio.Conn, e error) {
 		easy.Offline(s)
